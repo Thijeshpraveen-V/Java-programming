@@ -22,7 +22,7 @@ public class chessboard
             }
             System.out.println();
         }
-        scanner.close();
+        sc.close();
     }
 }
 OUTPUT:
