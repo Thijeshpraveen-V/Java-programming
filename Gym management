@@ -14,17 +14,17 @@ public class GYM
     }
     public static void main(String[] args)
     {
-        Scanner scanner=new Scanner(System.in);
-        GYM_203 m = new GYM_203();
+        Scanner sc=new Scanner(System.in);
+        GYM_203 m = new GYM();
         System.out.println("Welcome to GYM management");
         System.out.print("Enter the name :");
-        m.name=scanner.nextLine();
+        m.name=sc.nextLine();
         System.out.print("Enter the age:");
-        m.age=scanner.nextInt();
+        m.age=sc.nextInt();
         System.out.print("Active members? (true/false):");
-        m.isActive=scanner.nextBoolean();
+        m.isActive=sc.nextBoolean();
         System.out.print("Enter the duration in months:");
-        m.duration=scanner.nextInt();
+        m.duration=sc.nextInt();
         m.calculate_fee();
 
         System.out.println("Member details");
@@ -32,11 +32,11 @@ public class GYM
         System.out.println("Age:"+ m.age);
         System.out.println("Duration"+ m.duration + "months");
         System.out.println("Fee:"+ m.fee);
-
-
-
+        sc.close();
     }
 }
+
+
 OUTPUT:
 Welcome to GYM management
 Enter the name :THIJESH PRAVEEN V
