@@ -1,0 +1,50 @@
+package BM23AI200;
+import java.util.Scanner;
+public class GYM
+{
+    String name;
+    int age;
+    boolean isActive;
+    int duration;
+    double fee;
+
+    public void calculate_fee()
+    {
+        fee = duration * 50.0;
+    }
+    public static void main(String[] args)
+    {
+        Scanner scanner=new Scanner(System.in);
+        GYM_203 m = new GYM_203();
+        System.out.println("Welcome to GYM management");
+        System.out.print("Enter the name :");
+        m.name=scanner.nextLine();
+        System.out.print("Enter the age:");
+        m.age=scanner.nextInt();
+        System.out.print("Active members? (true/false):");
+        m.isActive=scanner.nextBoolean();
+        System.out.print("Enter the duration in months:");
+        m.duration=scanner.nextInt();
+        m.calculate_fee();
+
+        System.out.println("Member details");
+        System.out.println("Name:"+ m.name);
+        System.out.println("Age:"+ m.age);
+        System.out.println("Duration"+ m.duration + "months");
+        System.out.println("Fee:"+ m.fee);
+
+
+
+    }
+}
+OUTPUT:
+Welcome to GYM management
+Enter the name :THIJESH PRAVEEN V
+Enter the age:19
+Active members? (true/false):true
+Enter the duration in months:12
+Member details
+Name:UDAY
+Age:19
+Duration12months
+Fee:600.0
