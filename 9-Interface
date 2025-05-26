@@ -1,0 +1,131 @@
+package BM23AI200;
+
+// i. Interface for Stack Operations
+interface StackOperations {
+    void push(int item);
+    int pop();
+    void display();
+}
+
+// ii. Class that implements Fixed Length Stack
+class FixedStack implements StackOperations {
+    private int[] stack;
+    private int top;
+
+    public FixedStack(int size) {
+        stack = new int[size];
+        top = -1;
+    }
+
+    public void push(int item) {
+        if (top == stack.length - 1) {
+            System.out.println("Stack Overflow! Cannot push " + item);
+            return;
+        }
+        stack[++top] = item;
+    }
+
+    public int pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow!");
+            return -1;
+        }
+        return stack[top--];
+    }
+
+    public void display() {
+        if (top == -1) {
+            System.out.println("Stack is empty!");
+            return;
+        }
+        System.out.print("FixedStack contents: ");
+        for (int i = 0; i <= top; i++) {
+            System.out.print(stack[i] + " ");
+        }
+        System.out.println();
+    }
+}
+
+// iii. Class that implements Dynamic Length Stack
+class DynamicStack implements StackOperations {
+    private int[] stack;
+    private int top;
+
+    public DynamicStack() {
+        stack = new int[2];
+        top = -1;
+    }
+
+    public void push(int item) {
+        if (top == stack.length - 1) {
+            // Double the stack size
+            int[] newStack = new int[stack.length * 2];
+            System.arraycopy(stack, 0, newStack, 0, stack.length);
+            stack = newStack;
+        }
+        stack[++top] = item;
+    }
+
+    public int pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow!");
+            return -1;
+        }
+        return stack[top--];
+    }
+
+    public void display() {
+        if (top == -1) {
+            System.out.println("Stack is empty!");
+            return;
+        }
+        System.out.print("DynamicStack contents: ");
+        for (int i = 0; i <= top; i++) {
+            System.out.print(stack[i] + " ");
+        }
+        System.out.println();
+    }
+}
+
+// iv. Class to demonstrate Runtime Binding
+public class StackDemo {
+    public static void main(String[] args) {
+        StackOperations stackRef;
+
+        // Using FixedStack
+        System.out.println("Using FixedStack:");
+        stackRef = new FixedStack(3);  // runtime binding
+        stackRef.push(10);
+        stackRef.push(20);
+        stackRef.push(30);
+        stackRef.push(40); // Should cause overflow
+        stackRef.display();
+        System.out.println("Popped: " + stackRef.pop());
+        stackRef.display();
+
+        System.out.println();
+
+        // Using DynamicStack
+        System.out.println("Using DynamicStack:");
+        stackRef = new DynamicStack();  // runtime binding
+        stackRef.push(100);
+        stackRef.push(200);
+        stackRef.push(300); // Should expand
+        stackRef.display();
+        System.out.println("Popped: " + stackRef.pop());
+        stackRef.display();
+    }
+}
+
+Output:
+
+Using FixedStack:
+Stack Overflow! Cannot push 40
+FixedStack contents: 10 20 30 
+Popped: 30
+FixedStack contents: 10 20 
+
+Using DynamicStack:
+DynamicStack contents: 100 200 300 
+Popped: 300
+DynamicStack contents: 100 200 
