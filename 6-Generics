@@ -1,0 +1,78 @@
+package BM23AI200;
+
+import java.util.Arrays;
+
+public class GQueue<T> {
+    T[] que;
+    int size; // Removed static
+
+    public GQueue() {
+        que = (T[]) new Object[2];
+        size = 0;
+    }
+
+    public void enqueue(T element) {
+        if (size == que.length) {
+            int newCapacity = que.length * 2;
+            que = Arrays.copyOf(que, newCapacity);
+        }
+        que[size++] = element;
+    }
+
+    public T dequeue() {
+        if (size == 0) {
+            System.out.println("Queue is empty");
+            return null; // Add return to prevent error
+        }
+        T del_element = que[0];
+        System.arraycopy(que, 1, que, 0, size - 1);
+        que[--size] = null;
+        return del_element;
+    }
+
+    public void display() {
+        System.out.println("Queue contents:");
+        for (int i = 0; i < size; i++) {
+            System.out.println(que[i]);
+        }
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public static void main(String[] args) {
+        // Create a GrowableQueue of integers
+        GQueue<Integer> integerQueue = new GQueue<>();
+
+        // Enqueue elements
+        integerQueue.enqueue(10);
+        integerQueue.enqueue(20);
+        integerQueue.enqueue(30);
+
+        // Display queue
+        integerQueue.display();
+
+        // Dequeue an element
+        Integer dequeuedElement = integerQueue.dequeue();
+        System.out.println("Dequeued element: " + dequeuedElement);
+
+        // Display queue again
+        integerQueue.display();
+
+        // Display queue size
+        System.out.println("Queue size: " + integerQueue.getSize());
+    }
+}
+
+Output:
+
+Queue contents:
+10
+20
+30
+Dequeued element: 10
+Queue contents:
+20
+30
+Queue size: 2
