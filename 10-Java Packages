@@ -1,0 +1,68 @@
+package BM23AI200;
+
+
+package apack;
+
+public class A {
+    int defaultVar = 10;         // default
+    protected int protectedVar = 20;
+    private int privateVar = 30;
+    public int publicVar = 40;
+}
+
+
+package bpack;
+
+import apack.A;
+
+public class B extends A {
+    public void display() {
+        // System.out.println("Default: " + defaultVar);  // Not accessible (different package, not subclass)
+        System.out.println("Protected: " + protectedVar); // Accessible (protected + subclass)
+        // System.out.println("Private: " + privateVar);  // Not accessible (private)
+        System.out.println("Public: " + publicVar);       // Accessible
+    }
+}
+
+
+package cpack;
+
+import apack.A;
+
+public class C {
+    public void display() {
+        A a = new A();
+        // System.out.println("Default: " + a.defaultVar);  // Not accessible (default)
+        // System.out.println("Protected: " + a.protectedVar); // Not accessible (not subclass, different package)
+        // System.out.println("Private: " + a.privateVar);  // Not accessible
+        System.out.println("Public: " + a.publicVar);       // Accessible
+    }
+}
+
+
+package dpack;
+
+import bpack.B;
+import cpack.C;
+
+public class ProtectedDemo {
+    public static void main(String[] args) {
+        B b = new B();
+        C c = new C();
+
+        System.out.println("From class B (subclass of A):");
+        b.display();
+
+        System.out.println("\nFrom class C (non-subclass of A):");
+        c.display();
+    }
+}
+
+Output:
+
+From class B (subclass of A):
+Protected: 20
+Public: 40
+
+From class C (non-subclass of A):
+Public: 40
